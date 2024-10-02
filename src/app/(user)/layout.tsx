@@ -3,6 +3,6 @@ import React, { ReactNode } from "react";
 interface Props {
   children: ReactNode;
 }
-export const UserLayout = ({ children }: Props) => {
+export default function UserLayout({ children }: Props) {
   return <div className="">{children}</div>;
-};
+}
