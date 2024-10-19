@@ -16,7 +16,7 @@ export const project = pgTable("project", {
   userId: varchar("user_id"),
 });
 
-export const projectsRelation = relations(project, ({ many }) => ({
+export const projectRelation = relations(project, ({ many }) => ({
   feedback: many(feedback),
 }));
 
@@ -25,8 +25,8 @@ export const feedback = pgTable("feedback", {
   projectId: integer("project_id"),
   userName: text("user_name"),
   userEmail: text("user_email"),
-  rating: integer("rating"),
   message: text("message"),
+  rating: integer("rating"),
 });
 
 export const feedbackRelation = relations(feedback, ({ one }) => ({
@@ -35,3 +35,11 @@ export const feedbackRelation = relations(feedback, ({ one }) => ({
     references: [project.id],
   }),
 }));
+
+export const subscription = pgTable("subscriptions", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id"),
+  stripeCustomerId: text("stripe_customer_id"),
+  stripeSubscriptionId: text("stripe_subscription_id"),
+  subscribed: boolean("subscribed"),
+});
